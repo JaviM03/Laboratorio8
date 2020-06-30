@@ -28,6 +28,7 @@ public interface ClienteDAO {
 	public void updateCliente(Cliente c);
 	
 	public int ejecutarProcedimientoJdbc(Integer cliente, Boolean estado);
+
 	
 	public int[][] batchInsertVehiculos(final List<Vehiculo> vehiculos);
 	

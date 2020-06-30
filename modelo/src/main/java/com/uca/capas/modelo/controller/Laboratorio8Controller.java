@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.uca.capas.modelo.domain.Cliente;
@@ -67,11 +68,22 @@ public class Laboratorio8Controller {
 	//Procedimiento Almacenado
 	@RequestMapping("/procAlmacenadoJdbc")
 	public ModelAndView procAlmacenadoJdbc() {
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("usuario",new Cliente());
+		ModelAndView mav= new ModelAndView();
+		mav.addObject("usuario", new Cliente());
 		mav.setViewName("Laboratorio/procedimiento");
 		return mav;
 	}
+	
+	@RequestMapping("/ejecutarProcedimientoJdbc")
+    public ModelAndView ejecutarProcedimiento(@RequestParam Integer cliente, @RequestParam Boolean estado){
+        ModelAndView mav = new ModelAndView();
+        Integer resultado;
+        resultado = clienteService.ejecutarProcedimientoJdbc(cliente, estado);
+        mav.addObject("resultado", resultado);
+        mav.setViewName("Laboratorio/resultado");
+        return mav;
+    }
+	
 	
 	//INSERCION BATCH
 	

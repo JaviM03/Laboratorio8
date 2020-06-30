@@ -222,24 +222,24 @@ public class ClienteDAOImpl implements ClienteDAO {
 
 	@Override
 	public int ejecutarProcedimientoJdbc(Integer cliente, Boolean estado) {
+		
 		SimpleJdbcCall jdbcCall = new SimpleJdbcCall(jdbcTemplate)
 				.withSchemaName("store")
 				.withProcedureName("sp_actualizar_cliente")
 				.withoutProcedureColumnMetaDataAccess();
 		
-		jdbcCall.addDeclaredParameter(new SqlParameter("P_CLIENTE",Types.INTEGER));
-		jdbcCall.addDeclaredParameter(new SqlParameter("P_ESTADO",Types.BOOLEAN));
-		jdbcCall.addDeclaredParameter(new SqlOutParameter("P_SALIDA",Types.INTEGER));
+		jdbcCall.addDeclaredParameter(new SqlParameter("P_CLIENTE", Types.INTEGER));
+		jdbcCall.addDeclaredParameter(new SqlParameter("P_ESTADO", Types.BOOLEAN));
+		jdbcCall.addDeclaredParameter(new SqlOutParameter("P_SALIDA", Types.INTEGER));
 		
 		Map<String, Object> parametros = new HashMap<>();
 		parametros.put("P_CLIENTE", cliente);
 		parametros.put("P_ESTADO", estado);
 		
-		Map<String, Object> out =jdbcCall.execute(parametros);
+		Map<String, Object> out = jdbcCall.execute(parametros);
 		
 		return Integer.parseInt(out.get("P_SALIDA").toString());
-
-
+		
 	}
 
 	@Override
